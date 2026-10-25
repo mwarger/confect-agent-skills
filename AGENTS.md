@@ -40,6 +40,29 @@ If the skill uses bundled scripts, also review
 - Use `// Bad:` and `// Good:` comments in code examples
 - Follow existing file patterns in `skills/`
 
+## Confect rules
+
+This fork adapts the Convex skills to Confect 10.0.0 and Effect v4.
+
+- Use `skills/confect/references/confect-patterns.md` for each Convex to
+  Confect mapping. Do not invent a new pattern when the file has one.
+- Verify every Confect export in the installed `@confect/*` package source
+  (`src/` and `dist/*.d.ts`). Do not guess an API name. When the docs and the
+  source differ, the source wins.
+- Keep every Convex platform fact: limits, index rules, transactions, the
+  scheduler, crons, HTTP actions, file storage, auth, components, the CLI, and
+  deploy rules. Confect changes how code is written. It does not change how
+  Convex behaves.
+- When Confect does not wrap a Convex feature, say so. Show the supported
+  escape hatch.
+- Never copy code, names, tables, business rules, or comments from a private
+  app. Use neutral example domains: notes, messages, tasks, users.
+- Write new or changed text in short, plain sentences. Use one instruction per
+  sentence.
+- Leave unchanged upstream lines exactly as they are. This keeps upstream syncs
+  small.
+- Record each change to an upstream file in `.confect-port/ledger/`.
+
 ## File Structure
 
 Each skill should have:

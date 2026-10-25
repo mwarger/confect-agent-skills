@@ -1,5 +1,12 @@
 # Third-Party Notices
 
+## Convex AI guidelines
+
+`skills/confect/references/guidelines.md` adapts the Convex AI guidelines text
+to Confect. The source is the guidelines file that `npx convex ai-files install`
+writes (Convex `^1.44.0`). The Convex platform rules in that file come from
+[Convex](https://www.convex.dev). The source text is the work of Convex, Inc.
+
 ## Heroicons
 
 This repository vendors a small number of SVG icons from

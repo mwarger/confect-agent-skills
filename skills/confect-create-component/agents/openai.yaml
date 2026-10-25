@@ -1,0 +1,14 @@
+interface:
+  display_name: "Confect Create Component"
+  short_description:
+    "Design and build reusable Convex components with clear boundaries, wrapped by Confect."
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
+  brand_color: "#14B8A6"
+  default_prompt:
+    "Help me create a Convex component for this feature in my Confect app. First check that a
+    component is actually justified, then design the tables, API surface, and
+    app-facing Confect wrappers before implementing it."
+
+policy:
+  allow_implicit_invocation: true

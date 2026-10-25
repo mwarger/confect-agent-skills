@@ -84,12 +84,12 @@ test("buildSkillsManifest sorts skills and includes the passed repo SHA", async 
   await withTempDir(async (repoRoot) => {
     await writeSkill({
       repoRoot,
-      directoryName: "convex-zeta",
+      directoryName: "confect-zeta",
       extraFiles: [["references/example.md", "zeta"]],
     });
     await writeSkill({
       repoRoot,
-      directoryName: "convex-alpha",
+      directoryName: "confect-alpha",
       extraFiles: [["references/example.md", "alpha"]],
     });
 
@@ -101,9 +101,9 @@ test("buildSkillsManifest sorts skills and includes the passed repo SHA", async 
     assert.equal(manifest.repoSha, "repo-sha-123");
     assert.deepEqual(
       manifest.skills.map((skill) => skill.skillName),
-      ["convex-alpha", "convex-zeta"],
+      ["confect-alpha", "confect-zeta"],
     );
-    assert.equal(manifest.skills[0].directoryName, "convex-alpha");
+    assert.equal(manifest.skills[0].directoryName, "confect-alpha");
     assert.match(manifest.skills[0].skillHash, /^[a-f0-9]{64}$/);
   });
 });
@@ -112,8 +112,8 @@ test("buildSkillsManifest rejects directory and frontmatter name drift", async (
   await withTempDir(async (repoRoot) => {
     await writeSkill({
       repoRoot,
-      directoryName: "convex-alpha",
-      skillName: "convex-beta",
+      directoryName: "confect-alpha",
+      skillName: "confect-beta",
     });
 
     await assert.rejects(

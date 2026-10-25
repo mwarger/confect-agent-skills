@@ -1,6 +1,37 @@
-# Convex Agent Skills
+# Confect Agent Skills
 
-Agent skills for common Convex workflows.
+Agent skills for common Confect workflows.
+
+## About this fork
+
+This repository is a fork of
+[get-convex/agent-skills](https://github.com/get-convex/agent-skills). It adapts
+the Convex agent skills to [Confect](https://rjdellecese.gitbook.io/confect)
+10.0.0 and Effect v4. Confect is Effect on Convex.
+
+- Confect changes how you write code. It does not change how Convex behaves.
+- The Convex platform rules come from upstream. These rules include limits,
+  indexes, transactions, the scheduler, deploys, and the CLI. The fork keeps
+  them.
+- Each skill directory uses the `confect` form of the upstream name. For
+  example, `convex-add` is `confect-add`.
+- `skills/confect/references/confect-patterns.md` maps each Convex concept to
+  its Confect equivalent.
+- `.confect-port/ledger/` records the change to each upstream file. The ledger
+  files use the upstream skill names.
+
+To sync with upstream:
+
+```bash
+git fetch upstream
+git merge upstream/main
+```
+
+Attribution: the upstream content is the work of the
+[get-convex/agent-skills](https://github.com/get-convex/agent-skills) authors.
+It is licensed under the Apache License 2.0. This fork keeps the upstream
+[LICENSE](LICENSE). The fork changes are also licensed under the Apache License
+2.0. Each changed file is a modified version of the upstream file.
 
 ## License
 
@@ -16,10 +47,10 @@ Third-party materials remain under their respective licenses. See
 
 ```bash
 # Choose which skills you want
-npx skills add get-convex/agent-skills
+npx skills add mwarger/confect-agent-skills
 
 # OR Install all skills
-npx skills add get-convex/agent-skills --all
+npx skills add mwarger/confect-agent-skills --all
 ```
 
 ## Usage
@@ -38,27 +69,57 @@ you manually invoke them depends on your tool:
 For example, to kick off auth setup in Cursor or Claude Code:
 
 ```
-/convex-setup-auth
+/confect-auth
 ```
 
 In Windsurf:
 
 ```
-@convex-setup-auth
+@confect-auth
 ```
 
 ## Available Skills
 
-- `convex` - Top-level entry point for Convex work. Recommends installing Convex
-  AI files, then routes to a more specific Convex skill.
-- `convex-quickstart` - Start a new Convex project or add Convex to an existing
-  app.
-- `convex-setup-auth` - Set up authentication for a Convex app.
-- `convex-create-component` - Build a reusable Convex component with clear
+- `confect` - Top-level entry point for Confect work. Recommends installing the
+  Convex AI files, then routes to a more specific Confect skill.
+- `confect-add` - Add a capability to the current Confect app.
+- `confect-advisor` - Find the cause of read-limit and OCC events in code.
+- `confect-agent` - Add an AI agent or RAG backend.
+- `confect-auth` - Add authentication.
+- `confect-authz` - Audit and harden authorization.
+- `confect-backup` - Set up backups and run a restore drill.
+- `confect-billing` - Add Stripe billing and payments.
+- `confect-cost` - Preview spend and find the cheapest fix.
+- `confect-create-component` - Build a reusable Convex component with clear
   boundaries.
-- `convex-migration-helper` - Plan and run Convex migrations safely.
-- `convex-performance-audit` - Investigate Convex performance problems and
-  bottlenecks.
+- `confect-crons` - Add recurring scheduled jobs.
+- `confect-deploy-guard` - Classify the target deployment before a deploy
+  command.
+- `confect-design` - Design a reactive, type-safe backend.
+- `confect-docs` - Get the docs for the installed versions.
+- `confect-domains` - Point a custom domain at the app.
+- `confect-env` - Set deployment environment variables and secrets.
+- `confect-expert` - Write and fix Confect backend code.
+- `confect-explain-app` - Explain the data model, functions, and auth model of
+  an app.
+- `confect-improve-confect-plugin` - Send the session transcript to the Convex
+  team for a post-mortem.
+- `confect-insights` - Query the logs and health of a running app.
+- `confect-launch-readiness` - Run all audits into one readiness report.
+- `confect-migrate` - Migrate the schema and backfill data.
+- `confect-migrate-rehearse` - Rehearse a migration on a preview deployment.
+- `confect-monitor` - Watch for the next error or request.
+- `confect-optimize` - Audit security, scale, upgrades, and observability.
+- `confect-quickstart` - Start a new Confect app or add Confect to an existing
+  frontend.
+- `confect-reviewer` - Review Confect code before you ship it.
+- `confect-seed` - Seed or import data.
+- `confect-self-heal` - Find the cause of a production error and prepare a fix.
+- `confect-sentinel` - Set up production error capture.
+- `confect-suggest` - Suggest a component for a hand-built pattern.
+- `confect-test` - Write tests with `@confect/test`.
+- `confect-verify` - Prove a feature works, including the negative authz
+  cases.
 
 ## Skill Philosophy
 
