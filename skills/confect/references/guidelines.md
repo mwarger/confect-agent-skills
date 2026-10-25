@@ -415,7 +415,10 @@ const note = yield* Effect.promise(() => ctx.db.get(noteId));
 const reader = yield* DatabaseReader;
 const note = yield* reader.table("notes").get(noteId);
 ```
-- If you need to define a `Record` make sure that you correctly provide the type of the key and value in the type. In 10.0.0, `Schema.Record` does not accept `Id("users")` as a key schema. Use `Schema.Record(Schema.String, Schema.String)`, which compiles to `v.record(v.string(), v.string())`, and type the value in code as `Record<GenericId.GenericId<"users">, string>`. ```ts
+
+- If you need to define a `Record` make sure that you correctly provide the type of the key and value in the type. In 10.0.0, `Schema.Record` does not accept `Id("users")` as a key schema. Use `Schema.Record(Schema.String, Schema.String)`, which compiles to `v.record(v.string(), v.string())`, and type the value in code as `Record<GenericId.GenericId<"users">, string>`.
+
+```ts
 // Bad: Id(...) is not a valid Record key schema in 10.0.0.
 Schema.Record(Id("users"), Schema.String)
 
