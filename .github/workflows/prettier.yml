@@ -20,7 +20,8 @@ jobs:
       - run: pnpm format-check
 
   publish-skills-manifest:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # Turned off in the Confect fork: this job publishes the upstream Convex manifest.
+    if: false
     needs: prettier
     runs-on: ubuntu-latest
     steps:

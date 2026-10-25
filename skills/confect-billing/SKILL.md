@@ -86,7 +86,7 @@ Confect does not wrap component clients. Pass the raw ctx service (`ActionCtx`, 
        const siteUrl = yield* Config.String('SITE_URL').pipe(Config.withDefault('http://localhost:3000'), Effect.orDie);
        // The component client takes the raw ctx. Wrap each call in Effect.promise.
        const customer = yield* Effect.promise(() =>
-         stripeClient.getOrCreateCustomer(ctx, { userId: identity.tokenIdentifier, email: identity.email, name: identity.name }),
+         stripeClient.getOrCreateCustomer(ctx, { userId: identity.subject, email: identity.email, name: identity.name }),
        );
        return yield* Effect.promise(() =>
          stripeClient.createCheckoutSession(ctx, {
@@ -95,7 +95,7 @@ Confect does not wrap component clients. Pass the raw ctx service (`ActionCtx`, 
            mode: 'subscription',
            successUrl: `${siteUrl}/?success=true`,
            cancelUrl: `${siteUrl}/?canceled=true`,
-           subscriptionMetadata: { userId: identity.tokenIdentifier },
+           subscriptionMetadata: { userId: identity.subject },
          }),
        );
      }),
@@ -111,7 +111,7 @@ Confect does not wrap component clients. Pass the raw ctx service (`ActionCtx`, 
        );
        if (identity === null) return false;
        const subscriptions = yield* Effect.promise(() =>
-         ctx.runQuery(components.stripe.public.listSubscriptionsByUserId, { userId: identity.tokenIdentifier }),
+         ctx.runQuery(components.stripe.public.listSubscriptionsByUserId, { userId: identity.subject }),
        );
        return subscriptions.some((sub) => sub.status === 'active' || sub.status === 'trialing');
      }),
@@ -132,6 +132,6 @@ Confect does not wrap component clients. Pass the raw ctx service (`ActionCtx`, 
 - Gate on server-stored subscription state via isSubscribed query (reads component tables), not client claims.
 - convex/convex.config.ts must import from '@convex-dev/stripe/convex.config.js' (not .ts) — the .js extension is required by the Convex bundler.
 - Get the component reference from `confect/_generated/components`, not from `convex/_generated/api`.
-- Key Stripe users by `identity.tokenIdentifier`, not `subject` alone. Never take a user id as an argument.
+- Key Stripe users by `identity.subject`, as upstream does. Do not change the key in an existing app: customers saved under the old key lose their link. A new app with more than one auth issuer may use `identity.tokenIdentifier` from the start. Never take a user id as an argument.
 - Component clients take the raw ctx. Use `ActionCtx` or `QueryCtx`, and wrap each call in `Effect.promise`.
 - Declare expected failures in the spec with an `error` schema. Fail with a `Schema.TaggedError`. Other failures are defects.

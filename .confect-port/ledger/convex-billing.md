@@ -36,3 +36,7 @@ Open questions:
 - `registerRoutes` on the Confect router: relies on the router being a Convex `HttpRouter` (patterns E13 uses `http.route`). Not compiled with this component.
 - `tokenIdentifier` replaces `subject` as the Stripe userId. This breaks existing customer data keyed by `subject`. Confirm.
 - `identity.email` and `identity.name` may be `undefined`. Under `exactOptionalPropertyTypes` the component types may reject that.
+
+## Decision (2026-10-24)
+
+Keep `identity.subject` as the Stripe userId, as upstream does. A key change breaks the link to existing customers. The skill notes that a new app with more than one auth issuer may use `tokenIdentifier` from the start.
